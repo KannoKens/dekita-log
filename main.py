@@ -48,3 +48,13 @@ def create_entry(content: str = Form(...), category: str = Form("")):
 @app.get("/api/entries")
 def api_entries():
     return [dict(row) for row in db.list_all_entries()]
+
+
+@app.get("/calendar")
+def calendar(request: Request):
+    weeks = db.weekly_counts()
+    return templates.TemplateResponse(
+        request=request,
+        name="calendar.html",
+        context={"weeks": weeks},
+    )

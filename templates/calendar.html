@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>積み上がり | できたことログ</title>
+  <style>
+    :root { --bg:#faf9f7; --card:#fff; --ink:#2c2b29; --sub:#8a8780; --accent:#e8955a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+           background:var(--bg); color:var(--ink); line-height:1.6; }
+    .wrap { max-width: 620px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { font-size: 1.5rem; margin: 0 0 4px; }
+    .sub { color: var(--sub); font-size: .9rem; margin-bottom: 24px; }
+    .back-link { color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+
+    .grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 5px;
+            background: var(--card); padding: 18px; border-radius: 14px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.05); margin-top: 20px; }
+    .cell { aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+            font-size: .68rem; font-weight: 600; }
+    .cell.t0 { background: #ece9e3; color: #c3bfb5; }
+    .cell.t1 { background: #f6d9b7; color: #a3702e; }
+    .cell.t2 { background: var(--accent); color: #fff; }
+    .cell.t3 { background: #c9702e; color: #fff; }
+
+    .legend { display: flex; align-items: center; gap: 6px; margin-top: 16px; font-size: .8rem; color: var(--sub); }
+    .legend .cell { width: 16px; height: 16px; aspect-ratio: unset; font-size: 0; border-radius: 4px; }
+    .legend span.label { margin-right: 4px; }
+
+    .note { margin-top: 20px; font-size: .85rem; color: var(--sub); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>積み上がり</h1>
+    <div class="sub"><a class="back-link" href="/">← 今日の入力へ戻る</a></div>
+
+    <div class="grid">
+      {% for w in weeks %}
+      <div class="cell {{ w.tier }}" title="{{ w.range }}: {{ w.count }}回">
+        {% if w.tier == "t3" %}🎉{% elif w.count > 0 %}{{ w.count }}{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="legend">
+      <span class="label">記録なし</span><div class="cell t0"></div>
+      <div class="cell t1"></div>
+      <div class="cell t2"></div>
+      <div class="cell t3"></div><span class="label">週3回以上</span>
+    </div>
+    <div class="note">週に2回できたらもう十分すごい、を基準にした色分けです。マスにカーソルを合わせると期間と件数が見られます。</div>
+  </div>
+</body>
+</html>
