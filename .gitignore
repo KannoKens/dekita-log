@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.pyc
+dekita.db
+*:Zone.Identifier
